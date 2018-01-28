@@ -34,6 +34,7 @@ class App extends React.Component {
                                 <Route exact path="/" component={HomePage} />
                                 <Route path="/login" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
+                                <Route path="/trips" component={tripsPage} />
                             </div>
                         </Router>
                     </div>

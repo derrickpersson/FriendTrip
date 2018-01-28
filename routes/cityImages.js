@@ -33,5 +33,3 @@ const cityImages = {
   "Seoul": "https://static.pexels.com/photos/237211/pexels-photo-237211.jpeg",
   "Tokyo":"https://static.pexels.com/photos/34142/pexels-photo.jpg"
 }
-
-console.log(cityImages["Vancouver"]);
