@@ -37,7 +37,7 @@ module.exports = (datahelper) => {
   router.get('/users/:uid/trips', (req, res) => {
     let user_id = req.params.uid
     datahelper.queryUserTrips(user_id).then((data) => {
-      res.send(data);
+      return res.send(data);
     });
   });
 
@@ -115,7 +115,8 @@ module.exports = (datahelper) => {
       description: req.body.description,
       trip_id: req.params.tid,
       owner_id: req.session.user_id,
-      category: nlp.getCategory(req.body.description)
+      category: nlp.getCategory(req.body.description),
+      imgURL: req.body.imgURL
     };
     datahelper.addActivities(activity).then((data) =>{
       activity.id = data[0];
@@ -190,9 +191,22 @@ module.exports = (datahelper) => {
       // comment.id = data[0];
       // res.send(comment);
       console.log('after helper comment--------', data[0]);
-      res.send(data[0]);
+      return res.send(data[0]);
     });
   });
+  // get user id by Email
+  router.get('/invite/:email', (req, res) => {
+    datahelper.getUserByEmail(req.params.email).
+    then((data) => {
+      console.log('user by email', data);
+      return res.send(data[0]);
+    }).
+    catch((err) => {
+      return res.send(404);
+    })
+  })
+
+
 
   return router;
 }

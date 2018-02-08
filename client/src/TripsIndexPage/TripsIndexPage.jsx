@@ -75,7 +75,7 @@ class TripsPage extends React.Component {
       modalOpen: true
     })
   }
-  
+
   handleClose() {
     this.setState({
       ...this.state,
@@ -130,7 +130,13 @@ class TripsPage extends React.Component {
       user: user.id
     };
     // console.log('inviting those guys:', tripInvite);
+    const sendData = {
+      email: email,
+      sender: user
+    }
+
     dispatch(userActions.inviteFriend(tripInvite));
+    dispatch(userActions.sendInvite(sendData));
     this.setState({
       ...this.state,
       inviteModalOpen: false,
@@ -147,7 +153,7 @@ class TripsPage extends React.Component {
       inviteModalOpen: true
     })
   }
-  
+
   handleInviteClose() {
     this.setState({
       ...this.state,
@@ -173,7 +179,7 @@ class TripsPage extends React.Component {
         image: {avatar: true, src: `${trip.imgURL}`}
       });
     })
-    
+
     const invitedTrips = trips.filter(trip => Number(trip.owner_id) !== user.id);
     const { location, start_date, end_date, submittedLocation, submittedStart_date, submittedEnd_date, email, inviteTrip } = this.state;
     const panes = [
@@ -208,7 +214,7 @@ class TripsPage extends React.Component {
               FriendTrip
             </Menu.Item>
             <Menu.Item as='a' position='right'><Icon name='user' /> Profile</Menu.Item>
-            <Modal trigger={<Menu.Item as='a' onClick={this.handleInviteOpen}><Icon name='send' />Invite Friends</Menu.Item>}  
+            <Modal trigger={<Menu.Item as='a' onClick={this.handleInviteOpen}><Icon name='send' />Invite Friends</Menu.Item>}
               open={this.state.inviteModalOpen}
               onClose={this.handleInviteClose}
               >
@@ -239,7 +245,7 @@ class TripsPage extends React.Component {
             </Modal.Content>
           </Modal>
         </div>
-        <Tab panes={panes} style={{ marginTop: '2em' }} />
+        <Tab panes={panes} style={{ marginTop: '0.5em' }} />
       </div>
     );
   }
